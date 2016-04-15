@@ -104,11 +104,16 @@ must match a previous SeatHold request.
 
 3) SeatHold findAndHoldSeats(int numSeats, Optional<Integer> minLevel,Optional<Integer> maxLevel, String customerEmail);
 
-The minLevel and maxLevel parameters cannot be null.
-The minLevel parameter cannot be less than the maxLevel parameters
-The minLevel and maxLevel parameters cannot be less than 0.
-The numSeats to find and hold cannot be less than 0;
-The customerEmail must be of  registered user.
+The following validations are implemented
+
+minLevel and maxLevel parameters cannot be null.
+minLevel parameter cannot be less than the maxLevel parameters
+minLevel and maxLevel parameters cannot be less than 0.
+numSeats to find and hold cannot be less than 0;
+customerEmail must be of  registered user.
+
+The findAndHoldSeats call will return the best possible seats that satisfy the number of seats requested.
+ 
 
 If invalid parameters are passed the return value is null. the log also will indicate a description of the error.
 
