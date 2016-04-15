@@ -15,7 +15,7 @@ Solution Dependencies
 The packaged Ticket Service project will require the following additional jars
 junit-4.12
 log4j-1.2.17
-
+hamcrest-core-1.3 (for junit)
 
 Configuring the application to run
 -----------------------------------
@@ -51,9 +51,9 @@ public static void registerCustomer(Customer newCustomer);
 The above two configuration parameters must be set as required.
 
 
-Starting the applications
+Starting the service
 -----------------------------
-Before starting the application the AppConfig properties must 
+Before starting the service the AppConfig properties must 
 be set as described in "Configuring the application to run"
 step.
 
@@ -64,8 +64,11 @@ Programatically the the AppConfig must be initialized prior to starting the Simp
 		// instantiate ticket service after making the call to AppConfig.initializeAppParameters()
 		TicketService ticketService = new DefaultTicketService();
 
-Building Testing and Packaging the solution.
+The above step is mandatory and is needed to initialize the in memory database.
 
+
+Building Testing and Packaging the solution.
+-------------------------------------------
 mvn compile - Build the solution
 
 mvn test - Build and test the solution. The tests are defined in org.ticketservice.app.tests package.
@@ -112,8 +115,8 @@ If invalid parameters are passed the return value is null. the log also will ind
 
 Logging
 --------
-The application is configured to use log4j to log messages to the console. Modify the log4j.properties
-to customize it.
+The application is configured to use log4j to log messages to the console. 
+Modify the log4j.properties to customize it.
 
 
 

@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ticketservice.app.AppConfig;
-import org.ticketservice.app.dos.SeatReservation;
 import org.ticketservice.app.service.DefaultTicketService;
 import org.ticketservice.app.service.TicketService;
 import org.ticketservice.app.testutils.SeatHoldRequest;
