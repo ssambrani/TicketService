@@ -24,11 +24,11 @@ import org.ticketservice.app.dos.VenueSeat;
 public class AppConfig {
 
 	/**
-	 * default values configure via properties file
+	 * default values configure via properties file in SECONDS
 	 */
 	private static long SEAT_HOLD_EXPIRATION = 20;
 	/**
-	 * default values configure via properties file
+	 * default values configure via properties file in SECONDS
 	 */
 	private static long SEAT_HOLD_CLEANUP_SCHEDULER_INTERVAL = 10;
 	

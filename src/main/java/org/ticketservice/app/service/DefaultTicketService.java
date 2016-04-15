@@ -65,7 +65,7 @@ public class DefaultTicketService implements TicketService {
 		SeatHold sh = null;
 		// validate parameters and get seat holds
 		if (validateFindAndHoldSeatsParameters(numSeats, minLevel, maxLevel)) {
-			Set<Integer> levels = IntStream.rangeClosed(minLevel.orElse(maxLevel.get()), maxLevel.get()).boxed()
+			Set<Integer> levels = IntStream.rangeClosed(minLevel.get(), maxLevel.get()).boxed()
 					.collect(Collectors.toSet());
 			Customer c = ticketReservationStoreDAO.getCustomer(customerEmail).get();
 			sh = ticketReservationStoreDAO.findAndHoldSeats(numSeats, levels, c).get();
@@ -90,12 +90,17 @@ public class DefaultTicketService implements TicketService {
 	 */
 	private boolean validateFindAndHoldSeatsParameters(int numSeats, Optional<Integer> minLevel,
 			Optional<Integer> maxLevel) {
-		if ((!maxLevel.isPresent())) {
-			logger.error(" Max Level cannot be null. See Ticket Service API usage in README.");
+		if (!maxLevel.isPresent() || !maxLevel.isPresent()) {
+			logger.error(" minLevel and maxLevel cannot be null. See Ticket Service API usage in README.");
 			return false;
 		}
 		else if (minLevel.orElse(0) > maxLevel.get()) {
-			logger.error(" min level cannot be greater than max level. See Ticket Service API usage in README");
+			logger.error(" minLevel cannot be greater than maxLevel. See Ticket Service API usage in README");
+			return false;
+		}
+		else if(minLevel.get() <= 0 || maxLevel.get() <= 0)
+		{
+			logger.error(" minLevel, maxLevel cannot be less than 0. See Ticket Service API usage in README");
 			return false;
 		}
 		else if (numSeats <= 0) {

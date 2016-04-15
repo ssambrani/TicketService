@@ -60,21 +60,31 @@ public class InMemoryDataStoreDAO implements TicketServiveDataStoreDAO {
 
 	@Override
 	public String reserveSeat(int seatHoldId, String customerEmail) {
-		SeatReservation seatReservation = null;
+		Optional<SeatReservation> seatReservation;
+		String reservationCode;
 		writeLock.lock();
 		try
 		{
 			//get the seat reservations based on SeatHold id and customer email. Both must match 
 			seatReservation = seatReservations.stream().filter(sr -> sr.getReservationId() == seatHoldId)
-					.filter(sr -> sr.getCustomer().getCustomerEmailAddress() == customerEmail).findFirst().get();
-			seatReservation.setReservationCode(UUID.randomUUID().toString());	
+					.filter(sr -> sr.getCustomer().getCustomerEmailAddress() == customerEmail).findFirst();
+			
+			if(seatReservation.isPresent())
+			{
+				seatReservation.get().setReservationCode(UUID.randomUUID().toString());
+				reservationCode = seatReservation.get().getReservationCode();
+			}
+			else
+			{
+				reservationCode = "";
+			}
 		}
 		finally
 		{
 			writeLock.unlock();
 		}
 		
-		return seatReservation.getReservationCode();
+		return reservationCode;
 	}
 
 	@Override
