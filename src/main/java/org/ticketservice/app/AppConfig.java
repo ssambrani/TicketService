@@ -71,10 +71,7 @@ public class AppConfig {
 		}
 
 		// Register a few customers
-		registeredCustomers.add(new Customer("s1@gmail.com"));
-		registeredCustomers.add(new Customer("s2@gmail.com"));
-		registeredCustomers.add(new Customer("s3@gmail.com"));
-		registeredCustomers.add(new Customer("s4@gmail.com"));
+		
 		
 		logger.info(" Completed Application Configuration Initialization");
 	}
